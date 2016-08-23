@@ -1,0 +1,70 @@
+extends layout
+
+block content  
+	.col-xs-12.text-center
+		h1(class="text-primary")= title  
+
+		.container
+			.row
+				.col-xs-12.col1
+					form.form-horizontal(method="POST" role="form"  id = "itemform" action = "")
+						.form-group    
+							.div(class="col-xs-2")  
+								input(type="number", name="Code", id="Code", hidden)
+								input(type= "text", name = "operation" , id = "operation" , value = "ins" , hidden)
+
+						.div(class="form-group" "has-feedback")
+							label(for="Item" ,class="col-xs-2") Name  
+							.div(class="col-xs-8")  
+								input(type="text",  class="form-control", name="Item", id="Item" , required)
+						.form-group
+							.div(class="col-xs-6")
+								.btn-group(role='group', aria-label='Basic example')
+									button.btn.btn-primary.btn-lg(type='buttom'  id = "itembtn") Save
+									button.btn.btn-danger.btn-lg(type='button') Delete
+						.form-group
+							table(id="myTable",data-toggle='table',data-height='299' , data-click-to-select="true",data-select-item-name="radioName")
+								thead
+									tr
+										th(data-field="state", data-radio="true")
+										th.hide(data-field='id') Item ID         
+										th(data-field='name') Item Name
+								tbody
+									each item, i in items
+										tr
+											td
+											td.hide #{item.id}
+											td #{item.name}
+
+						script(type="text/javascript").
+									$(document).ready(function() {
+										$('#myTable').bootstrapTable({}).on('click-row.bs.table', function (e, row, $element) {
+											$('#operation').val('upd');
+											$('#Code').val(row.id);
+											$('#Item').val(row.name);
+										});
+
+										function validateText(id){
+
+											if ($('#'+id).val() == null || $('#'+id).val() == "")
+												{
+													var div = $("#"+id).closest("div");
+													div.addClass("has-error");
+													return false;
+												} else {
+													var div = $("#"+id).closest("div");
+													div.removeClass("has-error");
+													return true;
+
+												}
+
+										};
+										$('#itembtn').click(function() {
+											if (!validateText("Item")) 
+												{
+													return false;
+												};
+											$("form#itemform").submit();
+										});
+									});
+

@@ -1,0 +1,106 @@
+extends layout
+
+block content
+	.col-xs-12.text-center  
+		h3(class="text-primary")= title  
+		.container
+			.row
+				.col-xs-12.col1
+		
+					form.form-horizontal(method='POST', role='form')
+						.form-group    
+							label(for="FullName" ,class="col-xs-2") Full name  
+							.div(class="col-xs-8")  
+								input(type="text",  class="form-control", name="FullName", id="FullName")
+								input(type= "text", name = "operation" , id = "operation" , value = "ins" , hidden)
+								input(type= "text", name = "id" , id = "id" , hidden)
+						.form-group    
+							label(for="Email",class="col-xs-2") Email
+							.div(class="col-xs-8")     
+								input(type="email",class="form-control", name="Email", id="Email")
+						.form-group    
+							label(for="Telephone",class="col-xs-2") Telephone   
+							.div(class="col-xs-8") 
+								input(type="text", class="form-control",name="Telephone", id="Telephone")
+
+						.form-group    
+							label(for="ContactPersone",class="col-xs-2") Contact  Persone    
+							.div(class="col-xs-8") 
+								input(type="text", class="form-control",name="ContactPersone", id="ContactPersone")
+						.form-group    
+							label(for="OpenBalCridet",class="col-xs-2") Open Balance Credit   
+							.div(class="col-xs-2") 
+								input(type="Number", class="form-control",name="OpenBalCredit", id="OpenBalCredit")
+   
+							label(for="OpenBalDebit",class="col-xs-2") Open Balance Debit  
+							.div(class="col-xs-2") 
+								input(type="Number", class="form-control",name="OpenBalDebit", id="OpenBalDebit" )
+							.div(class="col-xs-2")
+								.btn-group(role='group', aria-label='Basic example')
+									button.btn.btn-primary.btn-lg(type='submit') Save
+									button.btn.btn-danger.btn-lg(type='button') Delete
+
+						.form-group    
+							label(for="ContactType" ,class="col-xs-2") Contact Type 
+							.div(class="col-xs-2")
+								select.selectpicker(name = "ContactType",id = "ContactType",  data-width="auto",title="Please Select...")
+									each type, i in contacttypes
+										option(value = "#{type.id}") #{type.name}  
+							label(for="OpenDate" ,class="col-xs-2") Open Balance Date
+							.div(class="col-xs-2")
+								input(class="datepicker" ,type='text',id = 'OpenDate', name = 'OpenDate')     
+						.form-group
+							.col-xs-12.col1.text-center
+								table(id="myTable",data-toggle='table', data-height='195', data-search = 'true',data-click-to-select="true",data-select-item-name="radioName")   
+									thead
+										tr
+											th(data-field="state", data-radio="true")
+											th.hide(data-field='id') Contact Id
+											th.hide(data-field='id1') type Id
+											th(data-field='name') Contact Name
+											th(data-field='email') Email
+											th(data-field='telephone') Telephone
+											th(data-field='contact_persone') Contact Person
+											th Contact Type
+											th(data-field='open_balance_Credit') O.B. Credit
+											th(data-field='open_balance_Debit') O.B. Debit
+											th(data-field='open_balance_date') O.B. Date
+
+									tbody
+										each contact, i in contacts
+											tr
+												td
+												td.hide #{contact.id}
+												td.hide #{contact.id1}
+												td #{contact.name}
+												td #{contact.email}
+												td #{contact.telephone}
+												td #{contact.contact_persone}
+												td #{contact.name1}
+												td #{contact.open_balance_Credit}
+												td #{contact.open_balance_Debit}
+												td #{contact.open_balance_date}
+
+						script(type='text/javascript').
+							$(document).ready(function () {
+								$('#OpenDate').datepicker({
+								 	format: "yyyy-mm-dd"
+								});
+								$('#myTable').bootstrapTable({}).on('click-row.bs.table', function (e, row, $element) {
+									$('#operation').val('upd');
+									$('#id').val(row.id);
+									$('#FullName').val(row.name);
+									$('#Email').val(row.email);
+									$('#Telephone').val(row.telephone);
+									$('#ContactPersone').val(row.contact_persone);
+									$('#OpenBalCredit').val(row.open_balance_Credit);
+									$('#OpenBalDebit').val(row.open_balance_Debit);
+									$('#OpenDate').val(row.open_balance_date);
+									$('select[name=ContactType]').val(row.id1);
+									$('.selectpicker').selectpicker('refresh');
+
+								});
+						
+
+							});
+			

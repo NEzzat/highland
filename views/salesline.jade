@@ -1,0 +1,89 @@
+extends layout
+
+block content
+	.container
+		.row     
+			.col-md-12.text-center
+				h3(class="text-primary")= title  
+				form.form-horizontal(method='post', role='form', action = "/salesline")
+					.row
+					.form-group     
+						.col-xs-2.text-left
+							.input-group
+								label(for="orederno") Order No.
+								input(type='text', class="form-control", id = 'orederno', name = 'orederno', value = locals.orderno, readonly)
+						.col-xs-1.text-left
+								label(for="orederno") -
+								span.input-group-btn
+									button.btn.btn-default(type='button' id = 'search', name = 'search') Go!
+						.col-xs-2.text-left
+							label(for="myDate") Date   
+							input(type='text', class="form-control", id = 'myDate', name = 'myDate',value = locals.orderdate, readonly)     
+						.col-xs-2.text-left
+							label(for="customer") Customer
+							input(type='text', class="form-control", id = 'customer', name = 'customer',value = locals.customer, readonly)
+					.row
+						.col-xs-2.text-left
+							label(for="Item") Item 
+							select.selectpicker(name = "Item", class="form-control",id = "Item" , data-live-search="true", title="Please Select...",required)
+								each item, i in items
+									option(value = "#{item.id}") #{item.name}
+						.col-xs-2.text-left
+							label(for="qty") Quantity
+							input(type='number',step="any", class="form-control", id = 'qty', name = 'qty',required)     
+						.col-xs-2.text-left
+							label(for="price") Price
+							input(type='number', step="any",class="form-control", id = 'price',name = 'price',required)  
+						.col-xs-2.text-left
+							label(for="unit") unit
+							input(type='text', class="form-control", id = 'unit',name = 'unit',required)  
+					.row
+						.col-xs-3.text-center
+							label(for="save") --
+							button.btn.btn-primary.form-control(type='submit' , name ='save', value ='save') Save
+						.col-xs-3.text-center
+							label(for="delete") --
+							button.btn.btn-danger.form-control(type='submit' , name = 'save' , value = 'delete') Delete
+						.div(class="col-xs-2")
+							input(type="text", name="operation", id="operation",value = "ins" , hidden)
+						.div(class="col-xs-2")
+							input(type="text", name="custid", id="custid",value = locals.custid , hidden)
+
+					.row
+					.form-group
+							table(id="myTable",data-toggle='table',data-height='299' , data-click-to-select="true",data-select-item-name="radioName",clase = 'striped')
+								thead
+									tr
+										th(data-field="state", data-radio="true")
+										th.hide(data-field='item_id') Item ID
+										th(data-field='name') Name
+										th(data-field='qty') QTY
+										th(data-field='price') Price
+										th(data-field='unit') Unit
+								tbody
+									if (lines) 
+										each line, i in lines
+											tr
+												td
+												td.hide #{line.item_id}
+												td #{line.name}
+												td #{line.qty}
+												td #{line.price}
+												td #{line.unit}
+					script(type="text/javascript").
+						$(document).ready(function() {
+							$('#myTable').bootstrapTable({}).on('click-row.bs.table', function (e, row, $element) {
+								$('#operation').val('upd');
+								$('#qty').val(row.qty);
+								$('#price').val(row.price);
+								$('#unit').val(row.unit);
+								$('select[name=Item]').val(row.item_id);
+								$('#Item').selectpicker('refresh')
+
+							});
+
+
+						});
+
+
+									

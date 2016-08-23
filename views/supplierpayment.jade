@@ -1,0 +1,81 @@
+extends layout
+
+block content
+	.col-xs-12.text-center
+		h1(class="text-primary")= title 
+
+		.container
+  
+				form.form-horizontal(method='post', role='form')
+					.row
+					.form-group     
+						.col-xs-2.text-left
+							.input-group
+								label(for="payno") Payment No.
+								input(type='text', class="form-control", id = 'payno', name = 'payno' )
+						.col-xs-1.text-left
+								label(for="orederno") -
+								span.input-group-btn
+									button.btn.btn-default(type='button' id = 'search', name = 'search') Find
+						.col-xs-2.text-left
+							label(for="myDate") Date   
+							input(type='text', class="form-control", id = 'myDate', name = 'myDate', required)     
+						.col-xs-2.text-left
+							label(for="supplier") Supplier
+							select.selectpicker(name = "supplier", class="form-control",id = "supplier" , data-live-search="true", title="Please Select...", required)
+								each supplier, i in suppliers
+									option(value = "#{supplier.id}") #{supplier.name}
+					.row
+						.col-xs-2.text-left
+							label(for="amount") Pay Amount
+							input(type='number',step="any", class="form-control", id = 'amount', name = 'amount',required)     
+						.col-xs-2.text-left
+							.radio
+								label.radio-inline
+									input(type='radio', name='optradio' , value = "cash", checked)
+									| Cash
+								label.radio-inline
+									input(type='radio', name='optradio' , value = "check")
+									| Check
+					.row
+						#my-div.hide.jumbotron
+							label(for="SALprice") Sales Price
+							input(type='number', step="any",class="form-control", id = 'SALprice',name = 'SALprice',required)
+
+					.hr(style='margin-bottom:10px !important; margin-top:10px !important; background-color:black; ')
+					.form-group
+						.col-xs-2.text-left
+							input(type="text", name="operation", id="operation",value = "ins" , hidden)  
+					.row
+					.form-group
+						.col-xs-3.text-center
+							button.btn.btn-primary.form-control(type='submit' , name ='save', value ='save') Save
+						.col-xs-3.text-center
+							button.btn.btn-danger.form-control(type='submit' , name = 'save' , value = 'delete') Delete
+
+				
+		script(type='text/javascript').
+			$(document).ready(function () {
+				$('#myDate').datepicker({
+					format: "yyyy-mm-dd"
+				});
+
+				$(function(){
+					$('input[type="radio"]').click(function(){
+						var myoption = $("input[name='optradio']:checked").val()
+						alert(myoption);
+						if (myoption == "check") {
+//							$("#my-div").hasClass( 'hide' )  $("#my-div").hide().removeClass('hide');
+							$("#my-div").hide().removeClass('hide');
+							$("#my-div").fadeIn();
+						};
+						//If the HIDE class exists then remove it, But first hide DIV
+						//if ( $("#my-div").hasClass( 'hide' ) ) $("#my-div").hide().removeClass('hide');
+						//Now, you can use any of these functions to display
+						//$("#my-div").show();
+						//$("#my-div").fadeIn();
+						//$("#my-div").toggle();
+					});
+				});
+
+			});

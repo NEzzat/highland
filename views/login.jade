@@ -1,0 +1,39 @@
+doctype html
+html(lang='en')
+  head
+    meta(http-equiv='content-type', content='text/html; charset=UTF-8')
+    meta(charset='utf-8')
+    title Bootstrap Login Form
+    meta(name='generator', content='Bootply')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    link(href='css/bootstrap.min.css', rel='stylesheet')
+  //  if lt IE 9
+      script(src='//html5shim.googlecode.com/svn/trunk/html5.js')
+  //    link(href='css/styles.css', rel='stylesheet')
+  body
+    // login modal
+    #loginModal.modal.show(tabindex='-1', role='dialog', aria-hidden='true')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+            h1.text-center(class="text-primary") Login
+            h3.text-center(class="text-danger") #{error}
+          .modal-body
+            form.form.col-md-12.center-block(method='POST', role='form' , action = '/login')
+              .form-group
+                input.form-control.input-lg(name = "username",id = "username", type='text', placeholder='Email')
+              .form-group
+                input.form-control.input-lg(name = "password", id = "password" , type='password', placeholder='Password')
+              .form-group
+                button.btn.btn-primary.btn-lg.btn-block(type='submit') Sign In
+                span.pull-right
+                  a(href='#') Register
+                span
+                  a(href='#') Need help?
+          .modal-footer
+            .col-md-12
+              button.btn(data-dismiss='modal', aria-hidden='true') Cancel
+    // script references
+    script(src='//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js')
+    script(src='js/bootstrap.min.js')

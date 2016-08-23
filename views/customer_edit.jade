@@ -1,0 +1,43 @@
+extends layout
+
+block content  
+	.col-xs-12.text-center 
+		h3= title  
+
+		.container
+			.row
+				.col-xs-12.col1
+		
+					form.form-horizontal(method='POST'  role='form')
+						.form-group    
+							label(for="FullName" ,class="col-xs-2") Full name  
+							.div(class="col-xs-8")  
+								input(type="text",  class="form-control", value='#{customers[0].name}', name="FullName",id="FullName")
+						.form-group    
+							label(for="address" ,class="col-xs-2") Address 
+							.div(class="col-xs-8")  
+								input(type="text",  class="form-control", value='#{customers[0].address}',name="address", id="address")
+						.form-group    
+							label(for="Email",class="col-xs-2") Email
+							.div(class="col-xs-8")     
+								input(type="email",class="form-control", value='#{customers[0].email}',name="Email", id="Email")
+						.form-group    
+							label(for="contact1Name",class="col-xs-2") 1st Contact  Name    
+							.div(class="col-xs-8") 
+								input(type="text", class="form-control",value='#{customers[0].Contact1Name}',name="contact1Name", id="contact1Name")
+						.form-group    
+							label(for="Contact1Telephone",class="col-xs-2") 1st Contact phone    
+							.div(class="col-xs-8") 
+								input(type="text", class="form-control",value='#{customers[0].Contact1Telephone}',name="Contact1Telephone", id="Contact1Telephone")
+						.form-group    
+							label(for="contact2Name",class="col-xs-2") 2nd Contact  Name    
+							.div(class="col-xs-8") 
+								input(type="text", class="form-control",value='#{customers[0].Contact2Name}',name="contact2Name", id="contact2Name")
+						.form-group    
+							label(for="Contact2Telephone",class="col-xs-2") 2nd Contact phone   
+							.div(class="col-xs-8") 
+								input(type="text", class="form-control",value='#{customers[0].Contact2Telephone}',name="Contact2Telephone", id="Contact2Telephone")
+						.form-group
+							.col-xs-2.col-xs-offset-2    
+								button.btn.btn-primary(type='submit') Save
+

@@ -1,0 +1,45 @@
+extends layout
+
+block content
+	.container
+		.row     
+			.col-md-12.text-center
+				h3(class="text-primary")= title  
+				form.form-horizontal(method='post', role='form')
+					.row
+					.form-group     
+						.col-xs-2.text-left
+							.input-group
+								label(for="orederno") Invoice No.
+								input(type='text', class="form-control", id = 'orederno', name = 'orederno' , required)
+						.col-xs-1.text-left
+								label(for="orederno") -
+								span.input-group-btn
+									button.btn.btn-default(type='button' id = 'search', name = 'search') Find
+						.col-xs-2.text-left
+							label(for="myDate") Date   
+							input(type='text', class="form-control", id = 'myDate', name = 'myDate', required)     
+						.col-xs-2.text-left
+							label(for="customer") Customer
+							select.selectpicker(name = "customer", class="form-control",id = "customer" , data-live-search="true", title="Please Select...", required)
+								each customer, i in customers
+									option(value = "#{customer.id}") #{customer.name}
+					.row
+						.col-xs-3.text-center
+							button.btn.btn-primary.form-control(type='submit' , name ='save', value ='save') Save
+						.col-xs-3.text-center
+							button.btn.btn-danger.form-control(type='submit' , name = 'save' , value = 'delete') Delete
+						.div(class="col-xs-2")
+							input(type="text", name="operation", id="operation",value = "ins" , hidden)
+							input(type="text", name="custname", id="custname",hidden)
+				hr
+		script(type='text/javascript').
+			$(document).ready(function () {
+				$('#myDate').datepicker({
+					format: "yyyy-mm-dd"
+				});
+				$('#customer').change(function () {
+					mycustomer = $(this).find("option:selected").text()
+					$('#custname').val(mycustomer) ;
+				});
+			});

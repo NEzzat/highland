@@ -1,0 +1,46 @@
+extends layout
+
+block content
+	.container
+		.row     
+			.col-md-12.text-center
+				h3= "Display Transaction No."
+				form.form-horizontal(method='get', role='form')
+					.row
+					.form-group     
+						.col-xs-2.text-left
+							.input-group
+								label(for="orederno") Order No.
+								input(type='text', class="form-control", id = 'orederno', name = 'orederno', value = locals.orderno, readonly)
+						.col-xs-2.text-left
+							label(for="myDate") Date   
+							input(type='text', class="form-control", id = 'myDate', name = 'myDate',value = locals.orderdate, readonly)     
+						.col-xs-2.text-left
+							label(for="supplier") Supplier
+							input(type='text', class="form-control", id = 'supplier', name = 'supplier',value = locals.supplier, readonly)
+					.row
+						.col-xs-2.text-left
+							label(for="item") Item
+							input(type='text', class="form-control", id = 'item', name = 'item',value = locals.item,readonly)
+						.col-xs-2.text-left
+							label(for="qty") Quantity Recivied
+							input(type='number',step="any", class="form-control", id = 'qtyRCV', name = 'qtyRCV',value = locals.qtyRCV, readonly)     
+						.col-xs-2.text-left
+							label(for="PURprice") Purchase Price
+							input(type='number', step="any",class="form-control", id = 'PURprice',name = 'PURprice',value = locals.PURprice, readonly)  
+						.col-xs-2.text-left
+							label(for="unit") unit
+							input(type='text', class="form-control", id = 'unit',name = 'unit',value = locals.unit, readonly)  
+					.row
+						.col-xs-2.text-left
+							label(for="customer") Customer
+							input(type='text', class="form-control", id = 'customer', name = 'customer',value = locals.supplier, readonly)
+						.col-xs-2.text-left
+							label(for="SALprice") Sales Price
+							input(type='number', step="any",class="form-control", id = 'SALprice',name = 'SALprice' ,value = locals.SALprice, readonly)  
+					.form-group
+					.row
+						.col-xs-3.text-center
+							button.btn.btn-primary.form-control(type='submit' , name ='ok', value ='ok') Ok
+
+

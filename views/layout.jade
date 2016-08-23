@@ -1,0 +1,58 @@
+doctype html
+html(lang='en')
+	head
+		meta(charset='utf-8')
+		meta(http-equiv='X-UA-Compatible', content='IE=edge')
+		meta(name='viewport', content='width=device-width,initial-scale=1')
+		title Highland Import & Export
+		link(rel='stylesheet', type='text/css', href='/css/bootstrap.css')
+		link(rel='stylesheet', type='text/css', href='/css/bootstrap-table.css')
+		link(rel='stylesheet', type='text/css', href='/css/bootstrap-select.min.css')
+		link(rel='stylesheet', type='text/css', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css')
+
+
+		//if lt IE 9
+		script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+		script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+
+	.navbar.navbar-default
+		.container-fluid
+			.navbar-header
+				button.navbar-toggle(type='button', navbar-startic-top,data-toggle='collapse', data-target='#mynavbar-content')
+					span.icon-bar
+					span.icon-bar
+					span.icon-bar
+				a.navbar-brand(href='#') Purchase & Sales Accounting
+			#mynavbar-content.collapse.navbar-collapse
+				ul.nav.navbar-nav
+					li
+						a(href='/') Home
+					li
+						a(href='/banks/') Banks
+					li
+						a(href='/contact/') Customers & Suppliers
+					li
+						a(href='/item/') Paper Items
+					li 
+						a(href='/Sales/') Transactions 
+					li.dropdown
+						a.dropdown-toggle(href='#', data-toggle='dropdown') Payment
+							span.caret
+						ul.dropdown-menu(role='menu')
+							li 
+								a(href='/supplier/') Supplier Payment 
+							li 
+								a(href='/collection/') Customer Collection 
+					li
+						a(href='#') Reports
+				ul.nav.navbar-nav.navbar-right
+					li 
+						a(href='/logout') Logout
+	script(src='/js/jquery.min.js')
+	script(src='/js/bootstrap.js')
+	script(src='/js/bootstrap-table.js')
+	script(src='/js/bootstrap-select.min.js')
+	script(src='/js/test.js')
+	script(src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js')
+	block content
+

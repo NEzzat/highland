@@ -1,0 +1,64 @@
+extends layout
+
+block content
+	.col-xs-12.text-center
+		h1(class="text-primary")= title 
+
+		.container
+  
+				form.form-horizontal(method='post', role='form')
+					.row
+					.form-group     
+						.col-xs-2.text-left
+							.input-group
+								label(for="payno") Collection No.
+								input(type='text', class="form-control", id = 'payno', name = 'payno' )
+						.col-xs-1.text-left
+								label(for="orederno") -
+								span.input-group-btn
+									button.btn.btn-default(type='button' id = 'findcollection', name = 'findcollection') Find
+						.col-xs-2.text-left
+							label(for="myDate") Collect Date   
+							input(type='date', class="form-control", id = 'myDate', name = 'myDate', required)     
+						.col-xs-2.text-left
+							label(for="customer") Customer
+							select.selectpicker(name = "customer", class="form-control",id = "customer" , data-live-search="true", title="Please Select...", required)
+								each customer, i in customers
+									option(value = "#{customer.id}") #{customer.name}
+					.row
+						.col-xs-2.text-left
+							label(for="amount") Received Amount
+							input(type='number',step="any", class="form-control", id = 'amount', name = 'amount',required)     
+						.col-xs-2.text-left
+							label(for="chkno") Check No.
+							input(type='number', class="form-control", id = 'chkno', name = 'chkno',required)     
+						.col-xs-2.text-left
+							label(for="chkdate") Value Date   
+							input(type='date', class="form-control", id = 'chkdate', name = 'chkdate', required)     
+						.col-xs-2.text-left
+							label(for="bank") Bank
+							select.selectpicker(name = "bank", class="form-control",id = "bank" , data-live-search="true", title="Please Select...", required)
+								each bank, i in banks
+									option(value = "#{bank.id}") #{bank.bank}
+
+					.hr(style='margin-bottom:10px !important; margin-top:10px !important; background-color:black; ')
+					.form-group
+						.col-xs-2.text-left
+							input(type="text", name="operation", id="operation",value = "ins" , hidden)  
+					.row
+					.form-group
+						.col-xs-3.text-center
+							button.btn.btn-primary.form-control(type='submit' , name ='save', value ='save') Save
+						.col-xs-3.text-center
+							button.btn.btn-danger.form-control(type='submit' , name = 'save' , value = 'delete') Delete
+
+					script(type='text/javascript').
+						$(document).ready(function () {
+							$('#myDate').datepicker({
+								format: "yyyy-mm-dd"
+							});
+							$('#chkdate').datepicker({
+								format: "yyyy-mm-dd"
+							});
+
+						});

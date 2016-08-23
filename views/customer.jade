@@ -1,0 +1,37 @@
+extends layout
+block content  
+
+	.col-xs-12.text-center 
+		h3= title  
+		.container
+			.col-xs-12.col1.text-center
+				table(data-toggle='table', data-height='399', data-cache='false' , data-search = 'true')   
+					thead
+						tr
+							th.hide Customer Id
+							th Customer Name
+							th Customer Address
+							th Customer Email
+							th 1st Contact
+							th his Tel.																					
+							th 2st Contact
+							th his Tel.
+							th Operations																					
+						tbody
+							each customer, i in customers
+								tr
+									td.hide #{customer.id}
+									td #{customer.name}
+									td #{customer.address}
+									td #{customer.email}
+									td #{customer.Contact1Name}
+									td #{customer.Contact1Telephone}
+									td #{customer.Contact2Name}
+									td #{customer.Contact2Telephone}
+									td 
+										a.btn.btn-warning(href='/customers/edit/#{customer.id}') Edit
+										a.btn.btn-danger(href='/customers/delete/#{customer.id}') Delete
+				a.btn.btn-primary(href= '/customers/new', role='button') Add
+
+
+

@@ -1,0 +1,48 @@
+extends layout
+
+block content  
+	.col-xs-12.text-center
+		h1(class="text-primary")= title  
+
+		.container
+			.row
+				.col-xs-12.col1
+					form.form-horizontal(method='POST', role='form' , action = '/banks')
+						.form-group    
+							.div(class="col-xs-2")  
+								input(type="number", name="Code", id="Code", hidden)
+								input(type= "text", name = "operation" , id = "operation" , value = "ins" , hidden)
+
+						.form-group
+							label(for="bank" ,class="col-xs-2") Bank Name  
+							.div(class="col-xs-8")  
+								input(type="text",  class="form-control", name="bank", id="bank",required)
+						.form-group
+							.div(class="col-xs-6")
+								.btn-group(role='group', aria-label='Basic example')
+									button.btn.btn-primary.btn-lg(type='submit') Save
+									button.btn.btn-danger.btn-lg(type='button') Delete
+						.form-group
+							table(id="myTable",data-toggle='table',data-height='299' , data-click-to-select="true",data-select-item-name="radioName" )
+								thead
+									tr
+										th(data-field="state", data-radio="true")
+										th.hide(data-field='id') Bank ID         
+										th(data-field='bank') Bank Name
+								tbody
+									each bank, i in banks
+										tr
+											td
+											td.hide #{bank.id}
+											td #{bank.bank}
+
+						script(type="text/javascript").
+									$(document).ready(function() {
+										$('#myTable').bootstrapTable({}).on('click-row.bs.table', function (e, row, $element) {
+											$('#operation').val('upd');
+											$('#Code').val(row.id);
+											$('#bank').val(row.bank);
+										});
+
+
+									});

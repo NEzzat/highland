@@ -1,0 +1,68 @@
+extends layout
+
+block content
+	.col-xs-12.text-center
+		h1(class="text-primary")= title 
+
+		.container
+  
+				form.form-horizontal(method='post', role='form')
+					.row
+					.form-group     
+						.col-xs-2.text-left
+							.input-group
+								label(for="orederno") Transaction No.
+								input(type='text', class="form-control", id = 'orederno', name = 'orederno' )
+						.col-xs-1.text-left
+								label(for="orederno") -
+								span.input-group-btn
+									button.btn.btn-default(type='button' id = 'search', name = 'search') Find
+						.col-xs-2.text-left
+							label(for="myDate") Date   
+							input(type='text', class="form-control", id = 'myDate', name = 'myDate', required)     
+						.col-xs-2.text-left
+							label(for="supplier") Supplier
+							select.selectpicker(name = "supplier", class="form-control",id = "supplier" , data-live-search="true", title="Please Select...", required)
+								each supplier, i in suppliers
+									option(value = "#{supplier.id}") #{supplier.name}
+					.row
+						.col-xs-2.text-left
+							label(for="Item") Item 
+							select.selectpicker(name = "Item", class="form-control",id = "Item" , data-live-search="true", title="Please Select...",required)
+								each item, i in items
+									option(value = "#{item.id}") #{item.name}
+						.col-xs-2.text-left
+							label(for="qty") Quantity Recivied
+							input(type='number',step="any", class="form-control", id = 'qtyRCV', name = 'qtyRCV',required)     
+						.col-xs-2.text-left
+							label(for="PURprice") Purchase Price
+							input(type='number', step="any",class="form-control", id = 'PURprice',name = 'PURprice',required)  
+						.col-xs-2.text-left
+							label(for="unit") unit
+							input(type='text', class="form-control", id = 'unit',name = 'unit',required)  
+					.row
+					.hr(style='margin-bottom:10px !important; margin-top:10px !important; background-color:black; ')
+					.form-group
+						.col-xs-2.text-left
+							label(for="customer") Customer
+							select.selectpicker(name = "customer", class="form-control",id = "customer" , data-live-search="true", title="Please Select...", required)
+								each customer, i in customers
+									option(value = "#{customer.id}") #{customer.name}
+						.col-xs-2.text-left
+							label(for="SALprice") Sales Price
+							input(type='number', step="any",class="form-control", id = 'SALprice',name = 'SALprice',required)
+							input(type="text", name="operation", id="operation",value = "ins" , hidden)  
+					.row
+					.form-group
+						.col-xs-3.text-center
+							button.btn.btn-primary.form-control(type='submit' , name ='save', value ='save') Save
+						.col-xs-3.text-center
+							button.btn.btn-danger.form-control(type='submit' , name = 'save' , value = 'delete') Delete
+
+				
+		script(type='text/javascript').
+			$(document).ready(function () {
+				$('#myDate').datepicker({
+					format: "yyyy-mm-dd"
+				});
+			});
