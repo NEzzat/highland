@@ -42,10 +42,9 @@ app.use(
     
     connection(mysql,{
         
-        host: '127.0.0.1',
-        user: 'root',
-        password : 'root',
-        port : 3306, //port mysql
+        host: 'mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/',
+        user: 'adminLcJPDbU',
+        password : 'lU4rE3SCY77F',
         database:'highland',
         dateStrings: 'date'
 
